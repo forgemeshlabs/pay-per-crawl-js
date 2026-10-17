@@ -1,5 +1,5 @@
 import Fastify from "fastify";
-import { payPerCrawl } from "@forgemesh/pay-per-crawl-node/fastify";
+import { payPerCrawl } from "@forgemeshlabs/pay-per-crawl-node/fastify";
 
 const app = Fastify();
 await app.register(payPerCrawl, { siteName: "Fastify example" });

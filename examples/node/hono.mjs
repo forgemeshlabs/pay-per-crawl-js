@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import { serve } from "@hono/node-server";
-import { payPerCrawl } from "@forgemesh/pay-per-crawl-node/hono";
+import { payPerCrawl } from "@forgemeshlabs/pay-per-crawl-node/hono";
 
 const app = new Hono();
 app.use("*", payPerCrawl({ siteName: "Hono example" }));

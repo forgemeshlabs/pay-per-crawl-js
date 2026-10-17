@@ -1,6 +1,6 @@
 {
-  "name": "@forgemesh/pay-per-crawl-core",
-  "version": "0.1.1",
+  "name": "@forgemeshlabs/pay-per-crawl-core",
+  "version": "0.1.2",
   "description": "Pay-per-Crawl core: crawler classifier, x402 v1/v2 + MPP 402 challenges, facilitator verify/settle, discovery files. Runs on Node 20+, Cloudflare Workers and the Next.js edge runtime.",
   "type": "module",
   "license": "MIT",

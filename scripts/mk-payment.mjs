@@ -1,7 +1,7 @@
 // Build payment request headers for the curl matrix (fake signature; the mock facilitator ignores it).
 // usage: node mk-payment.mjs v2|v1|v1-under|mpp <resourceUrl> [www-authenticate]
 import { randomBytes } from "node:crypto";
-import { keccakHex, X402 } from "@forgemesh/pay-per-crawl-core";
+import { keccakHex, X402 } from "@forgemeshlabs/pay-per-crawl-core";
 
 const [kind, , www] = process.argv.slice(2);
 const PAY_TO = process.env.PAY_TO || "0x13C3C28c64cc9d60eEb8a675F3fe27eBC6a4Cd09";

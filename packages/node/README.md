@@ -1,26 +1,26 @@
-# @forgemesh/pay-per-crawl-node
+# @forgemeshlabs/pay-per-crawl-node
 
-Express, Fastify, Hono and Koa adapters for x402 / MPP pay-per-crawl. Thin wrappers over `@forgemesh/pay-per-crawl-core`: same options, same discovery routes (`/.well-known/x402.json`, `/llms.txt`, `/agents.txt`). **You keep 100%**: no account, no custody.
+Express, Fastify, Hono and Koa adapters for x402 / MPP pay-per-crawl. Thin wrappers over `@forgemeshlabs/pay-per-crawl-core`: same options, same discovery routes (`/.well-known/x402.json`, `/llms.txt`, `/agents.txt`). **You keep 100%**: no account, no custody.
 
 ```
-npm install @forgemesh/pay-per-crawl-node
+npm install @forgemeshlabs/pay-per-crawl-node
 ```
 
 ```js
 // Express
-import { payPerCrawl } from "@forgemesh/pay-per-crawl-node/express";
+import { payPerCrawl } from "@forgemeshlabs/pay-per-crawl-node/express";
 app.use(payPerCrawl({ payTo: "0xYourWallet", mode: "monitor" })); // before your routes
 
 // Fastify
-import { payPerCrawl } from "@forgemesh/pay-per-crawl-node/fastify";
+import { payPerCrawl } from "@forgemeshlabs/pay-per-crawl-node/fastify";
 await app.register(payPerCrawl, { payTo: "0x...", mode: "gate" });
 
 // Hono (Node, Bun, Deno, Workers)
-import { payPerCrawl } from "@forgemesh/pay-per-crawl-node/hono";
+import { payPerCrawl } from "@forgemeshlabs/pay-per-crawl-node/hono";
 app.use("*", payPerCrawl({ payTo: "0x..." }));
 
 // Koa
-import { payPerCrawl } from "@forgemesh/pay-per-crawl-node/koa";
+import { payPerCrawl } from "@forgemeshlabs/pay-per-crawl-node/koa";
 app.use(payPerCrawl({ payTo: "0x..." }));
 ```
 

@@ -1,5 +1,5 @@
 import Koa from "koa";
-import { payPerCrawl } from "@forgemesh/pay-per-crawl-node/koa";
+import { payPerCrawl } from "@forgemeshlabs/pay-per-crawl-node/koa";
 
 const app = new Koa();
 app.use(payPerCrawl({ siteName: "Koa example" }));

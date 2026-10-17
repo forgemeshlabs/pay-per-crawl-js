@@ -1,7 +1,7 @@
 // Fastify plugin. await app.register(payPerCrawl, { payTo, mode: "gate" })
 // Applies to every route (skip-override), runs in onRequest before routing.
 import { buildRuntime, check } from "./common.js";
-import { nodeResolver } from "@forgemesh/pay-per-crawl-core/node-dns";
+import { nodeResolver } from "@forgemeshlabs/pay-per-crawl-core/node-dns";
 
 export async function payPerCrawl(fastify, options = {}) {
   const rt = buildRuntime(options, nodeResolver);

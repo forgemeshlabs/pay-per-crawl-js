@@ -3,7 +3,7 @@
 // KV (PPC_KV), Analytics Engine (PPC_ANALYTICS) and the Pro key are all optional.
 import {
   createGate, createProReporter, parseConfig, applyToResponse, dohResolver, kvStore, memoryStore, robotsLines, proEnabled,
-} from "@forgemesh/pay-per-crawl-core";
+} from "@forgemeshlabs/pay-per-crawl-core";
 
 const fallbackStore = memoryStore();
 const runtimes = new WeakMap();

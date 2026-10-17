@@ -6,11 +6,11 @@ Same behaviour as the ForgeMesh WordPress plugin, for every other stack:
 
 | Package | Use it for |
 |---|---|
-| [`@forgemesh/pay-per-crawl-worker`](packages/cloudflare-worker) | Cloudflare Worker in front of any origin (5-minute deploy) |
-| [`@forgemesh/pay-per-crawl-next`](packages/next) | Next.js middleware (edge runtime) and Next 16 `proxy` |
-| [`@forgemesh/pay-per-crawl-node`](packages/node) | Express, Fastify, Hono, Koa |
+| [`@forgemeshlabs/pay-per-crawl-worker`](packages/cloudflare-worker) | Cloudflare Worker in front of any origin (5-minute deploy) |
+| [`@forgemeshlabs/pay-per-crawl-next`](packages/next) | Next.js middleware (edge runtime) and Next 16 `proxy` |
+| [`@forgemeshlabs/pay-per-crawl-node`](packages/node) | Express, Fastify, Hono, Koa |
 | [`nginx/`](nginx) | nginx via njs (config snippet, not a package) |
-| [`@forgemesh/pay-per-crawl-core`](packages/core) | The framework-neutral engine the others wrap |
+| [`@forgemeshlabs/pay-per-crawl-core`](packages/core) | The framework-neutral engine the others wrap |
 
 ## How money flows
 

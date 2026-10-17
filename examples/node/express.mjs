@@ -1,6 +1,6 @@
 // PAY_TO=0x... MODE=gate node express.mjs
 import express from "express";
-import { payPerCrawl } from "@forgemesh/pay-per-crawl-node/express";
+import { payPerCrawl } from "@forgemeshlabs/pay-per-crawl-node/express";
 
 const app = express();
 app.use(payPerCrawl({ siteName: "Express example" })); // PAY_TO, PRICE_USD, MODE... come from env

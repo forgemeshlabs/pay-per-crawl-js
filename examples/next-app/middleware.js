@@ -1,4 +1,4 @@
-import { createPayPerCrawl } from "@forgemesh/pay-per-crawl-next";
+import { createPayPerCrawl } from "@forgemeshlabs/pay-per-crawl-next";
 
 // Reads PAY_TO, PRICE_USD, MODE, FACILITATOR_URL, ... from the environment; options here win.
 const ppc = createPayPerCrawl({ siteName: "Example Next Site" });

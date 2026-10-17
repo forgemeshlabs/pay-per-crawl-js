@@ -1,5 +1,5 @@
 // Node resolver for rDNS verification (uses dns.promises). Import from
-// "@forgemesh/pay-per-crawl-core/node-dns"; do not import it in edge/Workers code.
+// "@forgemeshlabs/pay-per-crawl-core/node-dns"; do not import it in edge/Workers code.
 import dns from "node:dns/promises";
 
 export function nodeResolver() {

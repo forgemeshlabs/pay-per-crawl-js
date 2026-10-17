@@ -1,7 +1,7 @@
 // DNS resolvers for reverse-DNS verification of search engines. A resolver is
 // { reverse(ip) -> Promise<string[]>, forward(host) -> Promise<string[]> } (A + AAAA).
 // dohResolver works anywhere fetch does (Workers, Next edge, Node); the Node
-// dns.promises resolver lives in "@forgemesh/pay-per-crawl-core/node-dns".
+// dns.promises resolver lives in "@forgemeshlabs/pay-per-crawl-core/node-dns".
 
 export function isIp(ip) {
   return isIpv4(ip) || isIpv6(ip);

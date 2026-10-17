@@ -3,7 +3,7 @@
 import { NextResponse } from "next/server.js";
 import {
   createGate, createProReporter, parseConfig, dohResolver, memoryStore, proEnabled, discoveryResponse,
-} from "@forgemesh/pay-per-crawl-core";
+} from "@forgemeshlabs/pay-per-crawl-core";
 
 const DEFAULT_ALLOW = ["/_next/"];
 
@@ -11,7 +11,7 @@ const DEFAULT_ALLOW = ["/_next/"];
 export const recommendedMatcher = "/((?!_next/static|_next/image|favicon.ico).*)";
 
 /**
- * @param {import("@forgemesh/pay-per-crawl-core").GateOptions & {pro?: {key?: string, listed?: boolean}, env?: Record<string,string|undefined>}} [options]
+ * @param {import("@forgemeshlabs/pay-per-crawl-core").GateOptions & {pro?: {key?: string, listed?: boolean}, env?: Record<string,string|undefined>}} [options]
  *   Options win over env vars (PAY_TO, PRICE_USD, MODE, FACILITATOR_URL, CLASS_POLICY, BOT_OVERRIDES, ALLOW_PATHS, MPP_SECRET, ...).
  */
 export function createPayPerCrawl(options = {}) {

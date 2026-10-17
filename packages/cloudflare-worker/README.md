@@ -1,4 +1,4 @@
-# @forgemesh/pay-per-crawl-worker
+# @forgemeshlabs/pay-per-crawl-worker
 
 A Cloudflare Worker that sits in front of any origin and charges AI crawlers per page with x402 and MPP. Humans and verified search engines pass free. **You keep 100%**: USDC goes straight to your wallet; no account, no custody.
 
@@ -21,7 +21,7 @@ cd packages/cloudflare-worker
 3. `npx wrangler deploy`.
 4. Leave `MODE = "monitor"` for a few days: bots are logged with what they would have paid, nothing is charged. Then set `MODE = "gate"` and redeploy.
 
-Or from your own project: `npm i @forgemesh/pay-per-crawl-worker`, then `src/worker.js` is just `export { default } from "@forgemesh/pay-per-crawl-worker";`, with the same `wrangler.toml`.
+Or from your own project: `npm i @forgemeshlabs/pay-per-crawl-worker`, then `src/worker.js` is just `export { default } from "@forgemeshlabs/pay-per-crawl-worker";`, with the same `wrangler.toml`.
 
 Check it:
 

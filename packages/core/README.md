@@ -1,13 +1,13 @@
-# @forgemesh/pay-per-crawl-core
+# @forgemeshlabs/pay-per-crawl-core
 
 Framework-neutral engine for x402 / MPP pay-per-crawl. Web-standard `Request`/`Response`; runs on Node 20+, Cloudflare Workers and the Next.js edge runtime. One runtime dependency (`@noble/hashes`, for keccak256 and HMAC).
 
 ```
-npm install @forgemesh/pay-per-crawl-core
+npm install @forgemeshlabs/pay-per-crawl-core
 ```
 
 ```js
-import { createGate, dohResolver } from "@forgemesh/pay-per-crawl-core";
+import { createGate, dohResolver } from "@forgemeshlabs/pay-per-crawl-core";
 
 const gate = createGate({
   payTo: "0xYourWallet", priceUsd: 0.01, mode: "gate",     // "monitor" logs only
@@ -30,7 +30,7 @@ if (r.type === "respond") return r.response; // 402 / 403
 
 ## Pieces
 
-- `classify(ua, headers, ip, {resolver, store, catalog})` with the 85-agent catalog and rDNS verification. `dohResolver()` (DNS-over-HTTPS, works anywhere) or `nodeResolver()` from `@forgemesh/pay-per-crawl-core/node-dns` (Node only).
+- `classify(ua, headers, ip, {resolver, store, catalog})` with the 85-agent catalog and rDNS verification. `dohResolver()` (DNS-over-HTTPS, works anywhere) or `nodeResolver()` from `@forgemeshlabs/pay-per-crawl-core/node-dns` (Node only).
 - `X402` class: `envelopeV2`, `bodyV1`, `mppChallenge`, `extractPayment`, `precheck`, `verifyAndSettle`, `mppReceipt`.
 - `memoryStore()`, `kvStore(kvNamespace)`: replay lock and rDNS cache. KV is eventually consistent, so the lock is best effort; the on-chain EIP-3009 nonce is the hard guard against double spend.
 - `createProReporter({key, site, store})`: optional batched reporting to the hosted dashboard. Never required.

@@ -1,7 +1,7 @@
 // Shared glue: framework request -> core gate, env config, optional Pro reporter.
 import {
   createGate, createProReporter, parseConfig, memoryStore, proEnabled, dohResolver,
-} from "@forgemesh/pay-per-crawl-core";
+} from "@forgemeshlabs/pay-per-crawl-core";
 
 /**
  * Build the gate once. Options win over env vars (PAY_TO, PRICE_USD, MODE, ...).

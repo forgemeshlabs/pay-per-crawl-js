@@ -1,15 +1,15 @@
-# @forgemesh/pay-per-crawl-next
+# @forgemeshlabs/pay-per-crawl-next
 
 Next.js middleware that charges AI crawlers per page with x402 and MPP. Edge-runtime compatible (Web APIs only, DNS-over-HTTPS for search-engine verification). **You keep 100%**: no account, no custody.
 
 ```
-npm install @forgemesh/pay-per-crawl-next
+npm install @forgemeshlabs/pay-per-crawl-next
 ```
 
 `middleware.js` (Next 14/15):
 
 ```js
-import { createPayPerCrawl } from "@forgemesh/pay-per-crawl-next";
+import { createPayPerCrawl } from "@forgemeshlabs/pay-per-crawl-next";
 
 const ppc = createPayPerCrawl({ siteName: "My Site" }); // PAY_TO, PRICE_USD, MODE ... come from env; options win
 export const middleware = ppc.middleware;
