@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1
+
+Security fix: exempt-path matching is anchored. `/robots.txt.x`, `/sitemapfoo`, `/.well-known/../post` and an allow path `/pricing` matching `/pricing-secret` used to let crawlers read gated pages free. Exact files, root-level sitemap `.xml`, the `/.well-known/` directory and allow paths (segment boundary) are exempt; paths with dot segments or `%2e` / `%2f` are gated. Applies to core, worker, next, node and the nginx njs script.
+
 ## 0.1.0
 
 First release. JavaScript editions of ForgeMesh Pay-per-Crawl, at behaviour parity with the WordPress plugin.

@@ -8,14 +8,51 @@ import { isIp } from "./resolver.js";
 import { MIN_PRICE_USD, MPP_PROBLEMS, X402, DEFAULT_FACILITATOR, usdToUnits } from "./x402.js";
 import { b64Encode, sha256Hex } from "./util.js";
 
-export const VERSION = "0.1.0";
+export const VERSION = "0.1.1";
 
 export const DEFAULT_CLASS_POLICY = Object.freeze({
   search: "free", social: "free", monitor: "free", seo: "paid", ai: "paid", automation: "paid", bot: "paid",
 });
 
 const POLICIES = ["free", "paid", "block"];
-const ALWAYS_FREE = ["/robots.txt", "/llms.txt", "/agents.txt", "/.well-known/", "/favicon.ico", "/sitemap"];
+const FREE_FILES = new Set(["/robots.txt", "/llms.txt", "/agents.txt", "/favicon.ico"]);
+const SITEMAP_RE = /^\/[a-z0-9_-]*sitemap[a-z0-9_-]*\.xml$/;
+
+/** Resolve "." and ".." segments (no decoding). */
+function normalizePath(p) {
+  const out = [];
+  const segs = p.split("/");
+  for (let i = 1; i < segs.length; i++) {
+    const s = segs[i];
+    if (s === "..") out.pop();
+    else if (s !== ".") out.push(s);
+  }
+  return "/" + out.join("/");
+}
+
+function under(norm, allow) {
+  if (allow.endsWith("/")) return norm.startsWith(allow);
+  return norm === allow || norm.startsWith(allow + "/");
+}
+
+/**
+ * Anchored exemption check: exact files, root-level sitemap .xml files, the /.well-known/ directory and
+ * allowPaths (path-segment boundary, so "/pricing" never matches "/pricing-secret"). Paths with dot
+ * segments, doubled slashes or %2e / %2f are never exempt.
+ */
+/** The path as written in the request URL (before URL normalisation), when the URL string is absolute. */
+function rawPathOf(href, url) {
+  const m = /^[a-z][a-z0-9+.-]*:\/\/[^/?#]*([^?#]*)/i.exec(href);
+  return m ? m[1] || "/" : url.pathname;
+}
+
+export function isFreePath(raw, allowPaths = []) {
+  if (typeof raw !== "string" || raw[0] !== "/" || /%2[ef]/i.test(raw)) return false;
+  const norm = normalizePath(raw);
+  if (norm.replace(/\/+$/, "") !== raw.replace(/\/+$/, "")) return false;
+  if (FREE_FILES.has(norm) || SITEMAP_RE.test(norm) || norm === "/.well-known" || under(norm, "/.well-known/")) return true;
+  return allowPaths.some((p) => (p = p.trim()) && under(norm, p));
+}
 const ASSET_EXT = /\.(?:css|js|mjs|map|png|jpe?g|gif|webp|avif|svg|ico|bmp|woff2?|ttf|otf|eot|mp4|webm|mp3|wav|ogg)$/i;
 const ADDRESS = /^0x[0-9a-fA-F]{40}$/;
 
@@ -84,8 +121,7 @@ export function createGate(options = {}) {
 
   function exempt(path, method) {
     if (!s.gateAllMethods && method !== "GET" && method !== "HEAD") return true;
-    if (ALWAYS_FREE.some((p) => path.startsWith(p))) return true;
-    if (s.allowPaths.some((p) => path.startsWith(p))) return true;
+    if (isFreePath(path, s.allowPaths)) return true;
     if (!s.gateAssets && ASSET_EXT.test(path)) return true;
     return false;
   }
@@ -169,7 +205,7 @@ export function createGate(options = {}) {
     if (s.discovery) passHeaders.set("link", linkHeader(base));
     const pass = (event) => ({ type: "pass", headers: passHeaders, event });
     const method = request.method.toUpperCase();
-    if (exempt(url.pathname, method)) return pass();
+    if (exempt(rawPathOf(request.url, url), method)) return pass();
 
     const h = Object.fromEntries(request.headers);
     const ua = h["user-agent"] || "";

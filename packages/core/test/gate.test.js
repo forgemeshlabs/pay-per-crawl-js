@@ -171,3 +171,27 @@ test("pro reporter batches rollups + settlements and posts them", async () => {
   assert.equal((await pro.flush()).skipped, "throttled");
   assert.equal(createProReporter({ key: "nope", site: {} }).enabled, false);
 });
+
+import { isFreePath } from "../src/gate.js";
+
+test("exempt paths are anchored", () => {
+  const cases = {
+    "/robots.txt": true, "/robots.txt.html": false, "/robots.txt.anything": false,
+    "/llms.txt": true, "/llms.txtx": false, "/agents.txt": true, "/favicon.ico": true,
+    "/sitemap.xml": true, "/wp-sitemap-posts-post-1.xml": true, "/sitemap_index.xml": true,
+    "/sitemapfoo": false, "/sitemap.xml/x": false, "/a/sitemap.xml": false,
+    "/.well-known/x402.json": true, "/.well-known/../post": false,
+    "/.well-known/%2e%2e/post": false, "/.well-known/%2E%2E/post": false, "/foo%2fbar": false,
+    "/pricing": true, "/pricing/": true, "/pricing/plans": true, "/pricing-secret": false,
+    "//robots.txt": false, "/post": false, "/": false,
+  };
+  for (const [p, want] of Object.entries(cases)) assert.equal(isFreePath(p, ["/pricing"]), want, p);
+  assert.ok(isFreePath("/docs/a", ["/docs/"]) && !isFreePath("/docs", ["/docs/"]) && !isFreePath("/docsx", ["/docs/"]));
+});
+
+test("gate: bots cannot read gated pages through look-alike exempt paths", async () => {
+  const { gate } = mk({ opts: { allowPaths: ["/pricing"] } });
+  for (const [path, type] of [["/robots.txt.html", "respond"], ["/sitemapfoo", "respond"], ["/pricing-secret", "respond"], ["/pricing/plans", "pass"], ["/sitemap.xml", "pass"]]) {
+    assert.equal((await gate.handle(req("https://example.test" + path, UA_GPT))).type, type, path);
+  }
+});

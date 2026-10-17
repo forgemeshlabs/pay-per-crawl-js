@@ -5,14 +5,39 @@
 // Needs njs >= 0.8.0 (shared dict add(), js_var, ngx.fetch). See README.md.
 import crypto from 'crypto';
 
-var VERSION = '0.1.0';
+var VERSION = '0.1.1';
 var USDC = '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913';
 var NET_V2 = 'eip155:8453';
 var NET_V1 = 'base';
 var TIMEOUT = 300;
 var MIN_PRICE = 0.005;
 var ASSET_EXT = /\.(css|js|mjs|map|png|jpe?g|gif|webp|avif|svg|ico|bmp|woff2?|ttf|otf|eot|mp4|webm|mp3|wav|ogg)$/i;
-var ALWAYS_FREE = ['/robots.txt', '/llms.txt', '/agents.txt', '/.well-known/', '/favicon.ico', '/sitemap'];
+var FREE_FILES = ['/robots.txt', '/llms.txt', '/agents.txt', '/favicon.ico'];
+var SITEMAP_RE = /^\/[a-z0-9_-]*sitemap[a-z0-9_-]*\.xml$/;
+
+function normalizePath(p) {
+  var out = [], segs = p.split('/');
+  for (var i = 1; i < segs.length; i++) {
+    if (segs[i] === '..') out.pop();
+    else if (segs[i] !== '.') out.push(segs[i]);
+  }
+  return '/' + out.join('/');
+}
+
+function under(norm, allow) {
+  if (allow.charAt(allow.length - 1) === '/') return norm.indexOf(allow) === 0;
+  return norm === allow || norm.indexOf(allow + '/') === 0;
+}
+
+// Anchored exemption: exact files, root sitemap .xml, /.well-known/, allow paths at a segment boundary.
+// Dot segments, doubled slashes and %2e / %2f are never exempt.
+function isFreePath(raw, allow) {
+  if (typeof raw !== 'string' || raw.charAt(0) !== '/' || /%2[ef]/i.test(raw)) return false;
+  var norm = normalizePath(raw);
+  if (norm.replace(/\/+$/, '') !== raw.replace(/\/+$/, '')) return false;
+  if (FREE_FILES.indexOf(norm) !== -1 || SITEMAP_RE.test(norm) || norm === '/.well-known' || under(norm, '/.well-known/')) return true;
+  return allow.some(function (p) { return p && under(norm, p); });
+}
 var DEFAULT_POLICY = { search: 'free', social: 'free', monitor: 'free', seo: 'paid', ai: 'paid', automation: 'paid', bot: 'paid' };
 
 // BEGIN CATALOG
@@ -493,8 +518,7 @@ function gate(r) {
   if (d) return send(r, 200, d.type, d.body, { 'Cache-Control': 'public, max-age=3600', 'Access-Control-Allow-Origin': '*' });
 
   var exempt = (method !== 'GET' && method !== 'HEAD') ||
-    ALWAYS_FREE.some(function (p) { return path.indexOf(p) === 0; }) ||
-    c.allow.some(function (p) { return path.indexOf(p) === 0; }) ||
+    isFreePath(path, c.allow) && !/%2[ef]/i.test(String(r.variables.request_uri).split('?')[0]) ||
     (!c.gateAssets && ASSET_EXT.test(path));
   if (exempt) return passThrough(r, c);
 
@@ -549,4 +573,4 @@ function gate(r) {
   });
 }
 
-export default { gate: gate, keccak256Hex: keccak256Hex, VERSION: VERSION };
+export default { gate: gate, keccak256Hex: keccak256Hex, isFreePath: isFreePath, VERSION: VERSION };
