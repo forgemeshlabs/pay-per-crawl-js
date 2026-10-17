@@ -1,0 +1,43 @@
+# Example configuration. Copy this file, set PAY_TO, then `npx wrangler deploy`.
+name = "pay-per-crawl"
+main = "src/index.js"
+compatibility_date = "2025-09-01"
+
+# Pick ONE way to attach the Worker to your site:
+# (a) a route on a zone you already have on Cloudflare:
+# routes = [{ pattern = "example.com/*", zone_name = "example.com" }]
+# (b) a custom domain:
+# routes = [{ pattern = "example.com", custom_domain = true }]
+# (c) workers.dev + ORIGIN_URL below (proxies to an origin hosted anywhere).
+
+[vars]
+PAY_TO = "0x0000000000000000000000000000000000000000"  # your USDC (Base) wallet; you keep 100%
+PRICE_USD = "0.01"            # per page fetch, minimum 0.005
+MODE = "monitor"             # monitor = log what bots WOULD pay, charge nothing. Switch to "gate" to charge.
+SITE_NAME = "My Site"
+# ORIGIN_URL = "https://origin.example.com"   # only for setup (c)
+# FACILITATOR_URL = "https://facilitator.payai.network"
+# CLASS_POLICY = '{"seo":"free","automation":"paid"}'     # free | paid | block per class
+# BOT_OVERRIDES = '{"GPTBot":"paid","Bytespider":"block"}' # per-bot, wins over class
+# ALLOW_PATHS = "/public/,/press/"                         # always free, prefix match
+# TRUST_HEADER = "cf-connecting-ip"                        # default
+# GATE_ASSETS = "false"                                    # static files (css/js/images) are free by default
+# LOG_TO_KV = "true"                                       # per-request rows into PPC_KV (7 day TTL)
+
+# Secrets (do not put these in [vars]):
+#   npx wrangler secret put MPP_SECRET    # any long random string, keeps MPP challenges valid across isolates
+#   npx wrangler secret put PRO_KEY       # optional: hosted dashboard license key
+
+# Optional: replay lock + Pro batching survive across isolates when KV is bound.
+# [[kv_namespaces]]
+# binding = "PPC_KV"
+# id = "<your KV namespace id>"
+
+# Optional: per-request analytics in Workers Analytics Engine.
+# [[analytics_engine_datasets]]
+# binding = "PPC_ANALYTICS"
+# dataset = "pay_per_crawl"
+
+# Optional (Pro): hourly flush of the dashboard batch.
+# [triggers]
+# crons = ["7 * * * *"]

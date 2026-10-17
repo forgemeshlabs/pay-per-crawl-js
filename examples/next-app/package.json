@@ -1,0 +1,12 @@
+{
+  "name": "pay-per-crawl-next-example",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": { "build": "next build", "start": "next start" },
+  "dependencies": {
+    "@forgemesh/pay-per-crawl-next": "^0.1.0",
+    "next": "^15.5.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}

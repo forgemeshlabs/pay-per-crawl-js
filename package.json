@@ -1,0 +1,18 @@
+{
+  "name": "pay-per-crawl-js",
+  "private": true,
+  "version": "0.1.0",
+  "description": "ForgeMesh Pay-per-Crawl, JavaScript editions: core, Cloudflare Worker, Next.js middleware.",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*",
+    "examples/*"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "npm test --workspaces --if-present && npm test --prefix nginx",
+    "pack:check": "npm pack --dry-run --workspace packages/core --workspace packages/cloudflare-worker --workspace packages/next --workspace packages/node"
+  }
+}

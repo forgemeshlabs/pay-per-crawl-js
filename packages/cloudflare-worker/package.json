@@ -1,0 +1,22 @@
+{
+  "name": "@forgemesh/pay-per-crawl-worker",
+  "version": "0.1.0",
+  "description": "Cloudflare Worker that puts x402 / MPP pay-per-crawl in front of any origin. Owner keeps 100%, no account, no custody.",
+  "type": "module",
+  "license": "MIT",
+  "main": "./src/index.js",
+  "exports": { ".": "./src/index.js" },
+  "files": ["src", "wrangler.toml", "README.md", "LICENSE"],
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "test": "node --test",
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "keywords": ["x402", "cloudflare-workers", "pay-per-crawl", "ai-crawlers", "mpp"],
+  "repository": { "type": "git", "url": "git+https://github.com/forgemeshlabs/pay-per-crawl-js.git", "directory": "packages/cloudflare-worker" },
+  "homepage": "https://github.com/forgemeshlabs/pay-per-crawl-js#readme",
+  "author": "ForgeMesh Labs",
+  "dependencies": { "@forgemesh/pay-per-crawl-core": "^0.1.0" },
+  "devDependencies": { "wrangler": "^4.0.0" }
+}

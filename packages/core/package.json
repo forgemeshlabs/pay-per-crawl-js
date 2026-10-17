@@ -1,0 +1,23 @@
+{
+  "name": "@forgemesh/pay-per-crawl-core",
+  "version": "0.1.0",
+  "description": "Pay-per-Crawl core: crawler classifier, x402 v1/v2 + MPP 402 challenges, facilitator verify/settle, discovery files. Runs on Node 20+, Cloudflare Workers and the Next.js edge runtime.",
+  "type": "module",
+  "license": "MIT",
+  "main": "./src/index.js",
+  "types": "./src/index.d.ts",
+  "exports": {
+    ".": { "types": "./src/index.d.ts", "default": "./src/index.js" },
+    "./node-dns": "./src/node-dns.js"
+  },
+  "files": ["src", "README.md", "LICENSE"],
+  "sideEffects": false,
+  "engines": { "node": ">=20" },
+  "scripts": { "test": "node --test" },
+  "keywords": ["x402", "402", "pay-per-crawl", "mpp", "ai-crawlers", "usdc", "base"],
+  "repository": { "type": "git", "url": "git+https://github.com/forgemeshlabs/pay-per-crawl-js.git", "directory": "packages/core" },
+  "homepage": "https://github.com/forgemeshlabs/pay-per-crawl-js#readme",
+  "bugs": { "url": "https://github.com/forgemeshlabs/pay-per-crawl-js/issues" },
+  "author": "ForgeMesh Labs",
+  "dependencies": { "@noble/hashes": "^1.8.0" }
+}

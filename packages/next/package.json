@@ -1,0 +1,20 @@
+{
+  "name": "@forgemesh/pay-per-crawl-next",
+  "version": "0.1.0",
+  "description": "Next.js middleware that answers AI crawlers with x402 / MPP pay-per-crawl. Edge-runtime compatible. Owner keeps 100%, no account, no custody.",
+  "type": "module",
+  "license": "MIT",
+  "main": "./src/index.js",
+  "types": "./src/index.d.ts",
+  "exports": { ".": { "types": "./src/index.d.ts", "default": "./src/index.js" } },
+  "files": ["src", "README.md", "LICENSE"],
+  "engines": { "node": ">=20" },
+  "scripts": { "test": "node --test" },
+  "keywords": ["x402", "nextjs", "middleware", "pay-per-crawl", "ai-crawlers", "mpp"],
+  "repository": { "type": "git", "url": "git+https://github.com/forgemeshlabs/pay-per-crawl-js.git", "directory": "packages/next" },
+  "homepage": "https://github.com/forgemeshlabs/pay-per-crawl-js#readme",
+  "author": "ForgeMesh Labs",
+  "peerDependencies": { "next": ">=14" },
+  "dependencies": { "@forgemesh/pay-per-crawl-core": "^0.1.0" },
+  "devDependencies": { "next": "^15.5.0" }
+}

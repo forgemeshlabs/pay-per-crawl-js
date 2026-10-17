@@ -1,0 +1,24 @@
+{
+  "name": "@forgemesh/pay-per-crawl-node",
+  "version": "0.1.0",
+  "description": "Pay-per-Crawl adapters for Express, Fastify, Hono and Koa: x402 / MPP 402 for AI crawlers, thin wrappers over the core. Owner keeps 100%, no account, no custody.",
+  "type": "module",
+  "license": "MIT",
+  "exports": {
+    "./express": "./src/express.js",
+    "./fastify": "./src/fastify.js",
+    "./hono": "./src/hono.js",
+    "./koa": "./src/koa.js"
+  },
+  "files": ["src", "README.md", "LICENSE"],
+  "engines": { "node": ">=20" },
+  "scripts": { "test": "node --test" },
+  "keywords": ["x402", "express", "fastify", "hono", "koa", "pay-per-crawl", "ai-crawlers", "mpp"],
+  "repository": { "type": "git", "url": "git+https://github.com/forgemeshlabs/pay-per-crawl-js.git", "directory": "packages/node" },
+  "homepage": "https://github.com/forgemeshlabs/pay-per-crawl-js#readme",
+  "author": "ForgeMesh Labs",
+  "dependencies": { "@forgemesh/pay-per-crawl-core": "^0.1.0" },
+  "peerDependencies": { "express": ">=4", "fastify": ">=4", "hono": ">=4", "koa": ">=2" },
+  "peerDependenciesMeta": { "express": { "optional": true }, "fastify": { "optional": true }, "hono": { "optional": true }, "koa": { "optional": true } },
+  "devDependencies": { "@hono/node-server": "^1.13.0", "express": "^4.21.0", "fastify": "^5.0.0", "hono": "^4.6.0", "koa": "^2.15.0" }
+}

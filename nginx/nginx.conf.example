@@ -1,0 +1,68 @@
+# Sample nginx.conf for ForgeMesh Pay-per-Crawl (njs). Needs nginx with ngx_http_js_module and njs >= 0.8.0.
+#   Debian/Ubuntu: apt install nginx-module-njs   (nginx.org repo)    Docker: nginx:*-otel / nginx with njs module
+# Copy pay-per-crawl.js to /etc/nginx/njs/ and edit the values below.
+
+load_module modules/ngx_http_js_module.so;
+
+events {}
+
+http {
+    js_path "/etc/nginx/njs/";
+    js_import ppc from pay-per-crawl.js;
+
+    # Facilitator (https://facilitator.payai.network) and DNS-over-HTTPS are fetched by njs:
+    resolver 1.1.1.1 valid=300s;
+    js_fetch_trusted_certificate /etc/ssl/certs/ca-certificates.crt;
+
+    # Replay lock for payment nonces (15 min) and the reverse-DNS cache for search engines (24 h).
+    js_shared_dict_zone zone=ppc_nonce:1m timeout=15m;
+    js_shared_dict_zone zone=ppc_rdns:2m timeout=24h;
+
+    # ---- configuration ----------------------------------------------------
+    js_var $ppc_pay_to        "0x0000000000000000000000000000000000000000";  # your USDC (Base) wallet; you keep 100%
+    js_var $ppc_price_usd     "0.01";            # per page fetch, minimum 0.005
+    js_var $ppc_mode          "monitor";         # monitor = log what bots would pay, charge nothing; gate = charge
+    js_var $ppc_site_name     "My Site";
+    js_var $ppc_mpp_secret    "change-me-to-a-long-random-string";
+    js_var $ppc_facilitator_url "https://facilitator.payai.network";
+    js_var $ppc_class_policy  "";                # e.g. {"seo":"free","automation":"paid"}   (free|paid|block)
+    js_var $ppc_bot_overrides "";                # e.g. {"GPTBot":"paid","Bytespider":"block"}
+    js_var $ppc_allow_paths   "";                # e.g. /public/,/press/   (prefix match, always free)
+    js_var $ppc_gate_assets   "off";             # static files (css/js/images) are free unless "on"
+    js_var $ppc_trust_header  "";                # e.g. x-forwarded-for / cf-connecting-ip when behind a proxy you trust
+    js_var $ppc_base_url      "";                # e.g. https://example.com when TLS terminates upstream of nginx
+    js_var $ppc_verify_rdns   "on";              # reverse-DNS check for claimed search engines
+    js_var $ppc_doh_url       "https://cloudflare-dns.com/dns-query";
+
+    # ---- outputs set by the script (use them in access_log or add_header) ---
+    js_var $ppc_status; js_var $ppc_class; js_var $ppc_bot; js_var $ppc_tx; js_var $ppc_reason;
+    js_var $ppc_receipt; js_var $ppc_mpp_receipt; js_var $ppc_cache_control; js_var $ppc_link; js_var $ppc_paid;
+
+    log_format ppc '$remote_addr "$request" $status class=$ppc_class bot="$ppc_bot" ppc=$ppc_status tx=$ppc_tx';
+
+    upstream origin { server 127.0.0.1:8080; }
+
+    server {
+        listen 80;
+        server_name example.com;
+        access_log /var/log/nginx/ppc.log ppc;
+
+        location / {
+            js_content ppc.gate;
+        }
+
+        # Where passed (human, free, paid) requests go. Receipts and discovery Link are added here.
+        location @ppc_origin {
+            proxy_pass http://origin;
+            proxy_set_header Host $host;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            add_header PAYMENT-RESPONSE   $ppc_receipt       always;
+            add_header X-PAYMENT-RESPONSE $ppc_receipt       always;
+            add_header Payment-Receipt    $ppc_mpp_receipt   always;
+            add_header Link               $ppc_link          always;
+            add_header Cache-Control      $ppc_cache_control always;
+            # If you use proxy_cache, never cache a paid response:
+            # proxy_no_cache $ppc_paid; proxy_cache_bypass $ppc_paid;
+        }
+    }
+}
