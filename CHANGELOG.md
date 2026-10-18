@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.3 (vercel 0.1.0)
+
+- New `@forgemeshlabs/pay-per-crawl-vercel`: Vercel Edge Middleware for any non-Next project on Vercel (static HTML, Astro, SvelteKit, Vite, Nuxt, Remix). `export default ppc.middleware` from `middleware.js`; `/_vercel/*` free; right-most `X-Forwarded-For` trusted; inline `next()` so there is no Vercel dependency. Example in `examples/vercel-static`.
+
 ## 0.1.1
 
 Security fix: exempt-path matching is anchored. `/robots.txt.x`, `/sitemapfoo`, `/.well-known/../post` and an allow path `/pricing` matching `/pricing-secret` used to let crawlers read gated pages free. Exact files, root-level sitemap `.xml`, the `/.well-known/` directory and allow paths (segment boundary) are exempt; paths with dot segments or `%2e` / `%2f` are gated. Applies to core, worker, next, node and the nginx njs script.

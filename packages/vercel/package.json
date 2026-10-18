@@ -1,0 +1,18 @@
+{
+  "name": "@forgemeshlabs/pay-per-crawl-vercel",
+  "version": "0.1.0",
+  "description": "Vercel Edge Middleware that answers AI crawlers with x402 / MPP pay-per-crawl, for any Vercel project (static sites, Astro, SvelteKit, Vite, Nuxt, Remix...). Owner keeps 100%, no account, no custody.",
+  "type": "module",
+  "license": "MIT",
+  "main": "./src/index.js",
+  "types": "./src/index.d.ts",
+  "exports": { ".": { "types": "./src/index.d.ts", "default": "./src/index.js" } },
+  "files": ["src", "README.md", "LICENSE"],
+  "engines": { "node": ">=20" },
+  "scripts": { "test": "node --test" },
+  "keywords": ["x402", "vercel", "edge-middleware", "pay-per-crawl", "ai-crawlers", "mpp", "static-site"],
+  "repository": { "type": "git", "url": "git+https://github.com/forgemeshlabs/pay-per-crawl-js.git", "directory": "packages/vercel" },
+  "homepage": "https://github.com/forgemeshlabs/pay-per-crawl-js#readme",
+  "author": "ForgeMesh Labs",
+  "dependencies": { "@forgemeshlabs/pay-per-crawl-core": "^0.1.2" }
+}

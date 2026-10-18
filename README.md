@@ -8,6 +8,7 @@ Same behaviour as the ForgeMesh WordPress plugin, for every other stack:
 |---|---|
 | [`@forgemeshlabs/pay-per-crawl-worker`](packages/cloudflare-worker) | Cloudflare Worker in front of any origin (5-minute deploy) |
 | [`@forgemeshlabs/pay-per-crawl-next`](packages/next) | Next.js middleware (edge runtime) and Next 16 `proxy` |
+| [`@forgemeshlabs/pay-per-crawl-vercel`](packages/vercel) | Vercel Edge Middleware for any other Vercel project: static sites, Astro, SvelteKit, Vite, Nuxt, Remix |
 | [`@forgemeshlabs/pay-per-crawl-node`](packages/node) | Express, Fastify, Hono, Koa |
 | [`nginx/`](nginx) | nginx via njs (config snippet, not a package) |
 | [`@forgemeshlabs/pay-per-crawl-core`](packages/core) | The framework-neutral engine the others wrap |

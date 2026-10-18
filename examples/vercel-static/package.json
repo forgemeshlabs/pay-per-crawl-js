@@ -1,0 +1,6 @@
+{
+  "name": "example-vercel-static",
+  "private": true,
+  "type": "module",
+  "dependencies": { "@forgemeshlabs/pay-per-crawl-vercel": "*" }
+}
