@@ -14,5 +14,8 @@
   "scripts": {
     "test": "npm test --workspaces --if-present && npm test --prefix nginx",
     "pack:check": "npm pack --dry-run --workspace packages/core --workspace packages/cloudflare-worker --workspace packages/next --workspace packages/vercel --workspace packages/node"
+  },
+  "overrides": {
+    "postcss": "^8.5.23"
   }
 }
