@@ -30,6 +30,14 @@ The middleware also serves `/.well-known/x402.json`, `/llms.txt` and `/agents.tx
 - `/_vercel/*`, static assets and non-GET/HEAD requests pass free. Bugs and bad config fail open: the site never goes down because of the gate.
 - Edge Middleware runs on every matched request, including bots that never pay. Vercel's Edge Middleware invocations are metered on paid plans; the free Hobby plan has a generous allowance.
 
+## Real settlement
+
+Verified on Vercel (production alias of a static project, Edge Middleware), PayAI facilitator, $0.01 USDC on Base to the ForgeMesh wallet `0x13C3C28c64cc9d60eEb8a675F3fe27eBC6a4Cd09`, October 2026:
+
+| Rail | Transaction |
+|---|---|
+| x402 v2 (`PAYMENT-SIGNATURE`, `@x402/core`) | `0xcc37097ef97b74f5ff0361cc98344bffce8fbba48bfdf3354c9094b1eec93766` |
+
 ## How money flows
 
 Crawler signs a USDC authorization; the middleware has the facilitator (PayAI by default) verify and settle, and serves the page only on a settlement transaction hash. USDC lands in `PAY_TO`.

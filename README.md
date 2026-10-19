@@ -38,6 +38,7 @@ Real mainnet payments through the Next.js example (PayAI facilitator, $0.01 each
 |---|---|
 | x402 v1 (`X-PAYMENT`, stock `x402-fetch` 1.x) | `0x5eb3ae89264f754793de655ade581cf9e4b885946d415d1d29d8d9e079077e7c` |
 | x402 v2 (`PAYMENT-SIGNATURE`, `@x402/core`) | `0x6f6e08909ef5e70e023649501721536e5e619a1008e2446f8a02830fdcc066c1` |
+| x402 v2 through the Vercel edition (static site, Edge Middleware) | `0xcc37097ef97b74f5ff0361cc98344bffce8fbba48bfdf3354c9094b1eec93766` |
 
 ## Pro (optional)
 
