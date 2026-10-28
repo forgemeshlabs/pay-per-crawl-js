@@ -1,6 +1,6 @@
 {
   "name": "@forgemeshlabs/pay-per-crawl-node",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Bot ledger plus an HTTP 402 price tag: see every AI, SEO and script crawler, keep search engines free, charge x402-capable agents in USDC on Base.",
   "type": "module",
   "license": "MIT",

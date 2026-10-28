@@ -1,6 +1,6 @@
 {
   "name": "@forgemeshlabs/pay-per-crawl-vercel",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Bot ledger plus an HTTP 402 price tag: see every AI, SEO and script crawler, keep search engines free, charge x402-capable agents in USDC on Base.",
   "type": "module",
   "license": "MIT",
