@@ -1,7 +1,7 @@
 {
   "name": "@forgemeshlabs/pay-per-crawl-next",
   "version": "0.1.2",
-  "description": "Next.js middleware that answers AI crawlers with x402 / MPP pay-per-crawl. Edge-runtime compatible. Owner keeps 100%, no account, no custody.",
+  "description": "Bot ledger plus an HTTP 402 price tag: see every AI, SEO and script crawler, keep search engines free, charge x402-capable agents in USDC on Base.",
   "type": "module",
   "license": "MIT",
   "main": "./src/index.js",

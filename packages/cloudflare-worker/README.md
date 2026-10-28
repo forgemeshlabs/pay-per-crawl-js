@@ -1,6 +1,6 @@
 # @forgemeshlabs/pay-per-crawl-worker
 
-A Cloudflare Worker that sits in front of any origin and charges AI crawlers per page with x402 and MPP. Humans and verified search engines pass free. **You keep 100%**: USDC goes straight to your wallet; no account, no custody.
+A Cloudflare Worker that sits in front of any origin and answers crawlers with an HTTP 402 price (x402 and MPP) and charges the ones that can pay. Today that means x402-capable agents; the big AI labs' crawlers do not pay per page yet. Humans and verified search engines pass free. **You keep 100%**: USDC goes straight to your wallet; no account, no custody.
 
 ## Before you start: turn Cloudflare's own bot blocking OFF
 
