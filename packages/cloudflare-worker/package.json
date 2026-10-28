@@ -1,7 +1,7 @@
 {
   "name": "@forgemeshlabs/pay-per-crawl-worker",
   "version": "0.1.2",
-  "description": "Cloudflare Worker that puts x402 / MPP pay-per-crawl in front of any origin. Owner keeps 100%, no account, no custody.",
+  "description": "Bot ledger plus an HTTP 402 price tag: see every AI, SEO and script crawler, keep search engines free, charge x402-capable agents in USDC on Base.",
   "type": "module",
   "license": "MIT",
   "main": "./src/index.js",

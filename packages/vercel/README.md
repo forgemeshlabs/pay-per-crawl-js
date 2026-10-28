@@ -1,6 +1,6 @@
 # @forgemeshlabs/pay-per-crawl-vercel
 
-Vercel Edge Middleware that charges AI crawlers per page with x402 and MPP. Works in front of **anything Vercel serves**: a static site, Astro, SvelteKit, Vite, Nuxt, Remix, Hugo, Docusaurus. (Next.js projects: use [`@forgemeshlabs/pay-per-crawl-next`](../next), same engine.) Only Web APIs, DNS-over-HTTPS for search-engine verification. **You keep 100%**: no account, no custody.
+Vercel Edge Middleware that answers crawlers with an HTTP 402 price (x402 and MPP) and charges the ones that can pay. Today that means x402-capable agents; the big AI labs' crawlers do not pay per page yet. Works in front of **anything Vercel serves**: a static site, Astro, SvelteKit, Vite, Nuxt, Remix, Hugo, Docusaurus. (Next.js projects: use [`@forgemeshlabs/pay-per-crawl-next`](../next), same engine.) Only Web APIs, DNS-over-HTTPS for search-engine verification. **You keep 100%**: no account, no custody.
 
 ```
 npm install @forgemeshlabs/pay-per-crawl-vercel

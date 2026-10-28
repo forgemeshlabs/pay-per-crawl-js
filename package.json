@@ -2,7 +2,7 @@
   "name": "pay-per-crawl-js",
   "private": true,
   "version": "0.1.0",
-  "description": "ForgeMesh Pay-per-Crawl, JavaScript editions: core, Cloudflare Worker, Next.js middleware, Vercel Edge Middleware, Node adapters.",
+  "description": "Bot ledger plus an HTTP 402 price tag: see every AI, SEO and script crawler, keep search engines free, charge x402-capable agents in USDC on Base.",
   "license": "MIT",
   "workspaces": [
     "packages/*",

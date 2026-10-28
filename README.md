@@ -1,6 +1,10 @@
 # ForgeMesh Pay-per-Crawl for JavaScript
 
-Charge AI crawlers and scrapers per page, in USDC on Base, using the open [x402](https://x402.org) and MPP protocols. Humans and verified search engines stay free. **You keep 100%**: payments go straight to your wallet, there is no account, no custody and no revenue share.
+**Know who crawls your site. Charge the ones that can pay.**
+
+Pay-per-Crawl shows you every AI crawler, SEO crawler and script that fetches your pages, verifies the real search engines by reverse DNS so SEO is untouched, and lets you answer everything else with a standard HTTP 402 price in USDC on Base, paid to your own wallet. Be clear about what pays today: x402-capable agents do; the big AI labs' crawlers (GPTBot, ClaudeBot, PerplexityBot and friends) do not yet pay anyone per page, and they simply get no content from a charging site. Until they do, this is an honest bot ledger with the price already on the door. You see who takes what, you can block or charge any of it, and when a crawler does pay, it goes straight to you. Nobody in between holds the money.
+
+This uses the open [x402](https://x402.org) and MPP protocols. Humans and verified search engines stay free. **You keep 100%**: payments go straight to your wallet, there is no account, no custody and no revenue share.
 
 Same behaviour as the ForgeMesh WordPress plugin, for every other stack:
 
